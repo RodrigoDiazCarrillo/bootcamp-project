@@ -1,6 +1,5 @@
-.DS_Store
+# npm
 node_modules
 package-lock.json
-secret.js
 *.log
 *.gz

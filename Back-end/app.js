@@ -27,8 +27,10 @@ app.use(express.json());
 
 const members = require('./Controller/memberController');
 const login = require('./Controller/loginController');
+const ad = require('./Controller/adController');
 app.use('/members', members)
 app.use('/login', login)
+app.use('/ad', ad)
 
 // Verificar que el servidor está escuchando
 app.listen(PORT, () => {

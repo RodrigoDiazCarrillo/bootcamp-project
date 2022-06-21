@@ -2,9 +2,10 @@ const express = require("express");
 const Model = require("../Model/memberModel");
 const {verifyToken} = require("../lib/utils");
 const router = express.Router();
+const cors = require('cors')
 
 //Post Method
-router.post("/post", (req, res) => {
+router.post("/post", verifyToken, (req, res) => {
   const data = new Model({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
@@ -20,7 +21,7 @@ router.post("/post", (req, res) => {
 });
 
 //Get all Method, with then()
-router.get("/", verifyToken, (req, res) => {
+router.get("/", cors(), (req, res) => {
   // console.log(req.payload)
   try {
     Model.find().then((data) => res.json(data));

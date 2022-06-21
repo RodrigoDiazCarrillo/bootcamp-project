@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken");
 const { verifyRefreshToken, generateToken } = require("../lib/utils");
 const Model = require("../Model/memberModel");
 const router = express.Router();
+const cors = require('cors')
+
+
 
 // Register
 router.post("/new", async (req, res) => {
@@ -52,7 +55,7 @@ router.post("/refresh", verifyRefreshToken, async (req, res) => {
 });
 
 // login
-router.post("/", async (req, res) => {
+router.post("/", cors(),async (req, res) => {
   try {
     Model.find({ email: req.body.email })
       .exec()
@@ -80,7 +83,7 @@ router.post("/", async (req, res) => {
             }
           );
         } else {
-          res.status(200).json({ message: "incorrect username or password" });
+          res.status(200).json({ message: "Incorrect username or password" });
         }
       });
     // change this to previously see the password

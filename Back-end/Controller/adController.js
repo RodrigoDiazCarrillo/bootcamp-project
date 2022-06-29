@@ -1,14 +1,14 @@
 const express = require("express");
 const Model = require("../Model/adModel");
 const router = express.Router();
-const cors = require('cors');
+const { verifyToken } = require("../lib/utils");
 
 
-//Get all Method, with then()
-router.get("/",cors(), (req, res) => {
-  // //console.log(req.payload)
+//Get all ads
+router.get("/", verifyToken,(req, res) => {
+  console.log(req)
   try {
-    Model.find().then((data) => res.json(data));
+    Model.find().then((data) => res.status(200).json(data));
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -16,7 +16,7 @@ router.get("/",cors(), (req, res) => {
 
 
 //Post Method
-router.post("/new",cors(), async(req, res) => {
+router.post("/new", async(req, res) => {
   const data = new Model({
     user: req.body.user,
     category: req.body.category,
@@ -33,17 +33,6 @@ router.post("/new",cors(), async(req, res) => {
 });
 
 
-
-// //Get by ID Method
-// router.get("/getOne/:id", (req, res) => {
-//   try {
-//     Model.findById(req.params.id)
-//       .exec()
-//       .then((data) => res.json(data));
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
 
 // // Update by ID Method
 // router.patch("/update/:id", (req, res) => {
@@ -74,6 +63,18 @@ router.post("/new",cors(), async(req, res) => {
 //     });
 //   } catch (error) {
 //     res.status(400).json({ message: error.message });
+//   }
+// });
+
+// //Get by ID Method
+// router.get("/getOne", (req, res) => {
+//   let collection = db.get('ads');
+//   try {
+//    collection.find(req.body.category)
+//       .exec()
+//       .then((data) => res.json(data));
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
 //   }
 // });
 

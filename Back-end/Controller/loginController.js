@@ -4,8 +4,20 @@ const jwt = require("jsonwebtoken");
 const { verifyRefreshToken, generateToken } = require("../lib/utils");
 const Model = require("../Model/memberModel");
 const router = express.Router();
-const cors = require('cors')
 
+const bodyParser = require('body-parser')
+
+
+var app = express()
+
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json' }))
+
+// parse some custom thing into a Buffer
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
+
+// parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html' }))
 
 
 // Register
@@ -24,8 +36,6 @@ router.post("/new", async (req, res) => {
 
   try {
     await data.save().then((dataToSave) => res.status(200).json(dataToSave));
-    // change this to previously see the password
-    // res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -55,13 +65,14 @@ router.post("/refresh", verifyRefreshToken, async (req, res) => {
 });
 
 // login
-router.post("/", cors(),async (req, res) => {
+router.post("/",async (req, res) => {
+  console.log(req);
   try {
     Model.find({ email: req.body.email })
       .exec()
       .then((result) => {
         if (result.length > 0) {
-          // console.log(result)
+    
           bcrypt.compare(
             req.body.password,
             result[0].password,
@@ -73,6 +84,10 @@ router.post("/", cors(),async (req, res) => {
                   status: "success",
                   token: generateToken(result, false),
                   refresh_token: generateToken(result, true),
+                  email: result[0].email,
+                  first_name: result[0].first_name,
+                  last_name: result[0].last_name,
+                  role: result[0].role,
                   error: error || null,
                 });
               } else {

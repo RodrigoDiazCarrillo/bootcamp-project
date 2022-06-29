@@ -2,7 +2,6 @@ const express = require("express");
 const Model = require("../Model/memberModel");
 const {verifyToken} = require("../lib/utils");
 const router = express.Router();
-const cors = require('cors')
 
 //Post Method
 router.post("/post", verifyToken, (req, res) => {
@@ -21,8 +20,7 @@ router.post("/post", verifyToken, (req, res) => {
 });
 
 //Get all Method, with then()
-router.get("/", cors(), (req, res) => {
-  // console.log(req.payload)
+router.get("/", verifyToken, (req, res) => {
   try {
     Model.find().then((data) => res.json(data));
   } catch (error) {
@@ -70,7 +68,7 @@ router.delete("/delete/:id", (req, res) => {
       res.send(data);
     });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({message: error.message });
   }
 });
 

@@ -51,7 +51,7 @@ const generateToken = (payload, refresh = false) => {
     });
   } else {
     return jwt.sign({ role: payload[0].role }, process.env.SECRET, {
-      expiresIn: "1m",
+      expiresIn: "15m",
     });
   }
 };

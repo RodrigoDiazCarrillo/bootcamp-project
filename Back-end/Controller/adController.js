@@ -16,13 +16,13 @@ router.get("/", verifyToken,(req, res) => {
 
 
 //Post Method
-router.post("/new", async(req, res) => {
+router.post("/new",verifyToken, async(req, res) => {
   const data = new Model({
     user: req.body.user,
     category: req.body.category,
     title: req.body.title,
     description: req.body.description,
-    image: req.body.image,
+    image: req.body.image,  
   });
 
   try {

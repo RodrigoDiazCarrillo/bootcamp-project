@@ -58,7 +58,7 @@ router.patch("/update/:id", (req, res) => {
 });
 
 //Delete by ID Method
-router.delete("/delete/:id", (req, res) => {
+router.delete("/delete/:id", verifyToken, (req, res) => {
   try {
     let id = req.params.id;
     Model.findByIdAndDelete(id).then((result) => {

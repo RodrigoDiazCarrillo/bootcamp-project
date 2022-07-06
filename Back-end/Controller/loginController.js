@@ -88,6 +88,7 @@ router.post("/",async (req, res) => {
                   first_name: result[0].first_name,
                   last_name: result[0].last_name,
                   role: result[0].role,
+                  id: result[0].id,
                   error: error || null,
                 });
               } else {

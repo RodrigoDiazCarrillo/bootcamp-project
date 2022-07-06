@@ -42,13 +42,14 @@ Run `npm run dev`for development
 - **Authorization**: **`Bearer token`**
 
 |      TYPE  |  METHOD|       URL                        |        BODY
-| `LOGIN`       | `POST`|`http://127.0.0.1:8000/login`  |`{"email": "","password": ""`            |
-| `NEW USER`    | `POST`| `http://127.0.0.1:8000/login/new`|`{"first_name":"", "last_name":"", email": "","password": ""}`|
-| `DELETE USER` | `DELETE`| `http://127.0.0.1:8000/members/delete:id`|--|
-| `EDIT USER`   | `PATCH`|`http://127.0.0.1:8000/members/update:id`|`{"first_name":"", "last_name":"", email": "","password": ""}`|
-| `ALL USERS`   | `GET`| `http://127.0.0.1:8000/members`  |--|
-| `INSERT AD`   | `POST`| `http://127.0.0.1:8000/ad/new` | `{"user":"", "category":""," title": "","description": "","image":""}`|
-| `GET ALL ADS` | `GET`| `http://127.0.0.1:8000/ad/`       | --|
+| :---------- | :---- | :--------------------------------|:---------------------------------------------------------------------------------------------------------------
+| `LOGIN`       | `POST`|`http://127.0.0.1:8000/login`  |`{"email": "","password": ""`            
+| `NEW USER`    | `POST`| `http://127.0.0.1:8000/login/new`|`{"first_name":"", "last_name":"", email": "","password": ""}`
+| `DELETE USER` | `DELETE`| `http://127.0.0.1:8000/members/delete:id`|--
+| `EDIT USER`   | `PATCH`|`http://127.0.0.1:8000/members/update:id`|`{"first_name":"", "last_name":"", email": "","password": ""}`
+| `ALL USERS`   | `GET`| `http://127.0.0.1:8000/members`  |--
+| `INSERT AD`   | `POST`| `http://127.0.0.1:8000/ad/new` | `{"user":"", "category":""," title": "","description": "","image":""}`
+| `GET ALL ADS` | `GET`| `http://127.0.0.1:8000/ad/`       | --
 
 ### 📜 License
 
